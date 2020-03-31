@@ -5,21 +5,22 @@ import os
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+# basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+CORS(app)
 
-# class Form(db.Model):
-#     id = db.Column(db.Integer, primary_key =True)
-#     name = db.Column(db.String(100), unique=False)
-#     email = db.Column(db.String, unique=False)
-#     message= db.Column(db.String, unique=False)
+class Form(db.Model):
+    id = db.Column(db.Integer, primary_key =True)
+    name = db.Column(db.String(100), unique=False)
+    email = db.Column(db.String, unique=False)
+    message= db.Column(db.String, unique=False)
 
-#     def __init__(self, name, email, message):
-#         self.name = name
-#         self.email = email
-#         self.message = message
+    def __init__(self, name, email, message):
+        self.name = name
+        self.email = email
+        self.message = message
 
 # class FormSchema(ma.Schema):
 #     class Meta:
